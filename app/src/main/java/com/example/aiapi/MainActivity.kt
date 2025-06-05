@@ -27,7 +27,11 @@ import java.io.IOException
 
 class MainActivity : ComponentActivity() {
     private val client = OkHttpClient()
-    private val apiKey = "sk-b0317b6fd0314fddb4777f6b80ca7d89"
+    private val apiKey = "sk-4a66e9419ff845299f8bea8a1d8bb748" // Geçerli DeepSeek API key
+    
+    // Test için alternatif API endpoint'leri
+    private val deepSeekUrl = "https://api.deepseek.com/chat/completions"
+    private val testUrl = deepSeekUrl // Buraya farklı endpoint yazabilirsiniz
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -229,7 +233,7 @@ class MainActivity : ComponentActivity() {
             
             val requestBody = json.toString().toRequestBody("application/json".toMediaType())
             val request = Request.Builder()
-                .url("https://api.deepseek.com/chat/completions")
+                .url(testUrl)
                 .addHeader("Authorization", "Bearer $apiKey")
                 .addHeader("Content-Type", "application/json")
                 .post(requestBody)
