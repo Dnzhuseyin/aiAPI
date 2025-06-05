@@ -27,11 +27,11 @@ import java.io.IOException
 
 class MainActivity : ComponentActivity() {
     private val client = OkHttpClient()
-    private val apiKey = "sk-4a66e9419ff845299f8bea8a1d8bb748" // Geçerli DeepSeek API key
+    private val apiKey = "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" // Groq API key
     
-    // Test için alternatif API endpoint'leri
-    private val deepSeekUrl = "https://api.deepseek.com/chat/completions"
-    private val testUrl = deepSeekUrl // Buraya farklı endpoint yazabilirsiniz
+    // Groq API endpoint'i  
+    private val groqUrl = "https://api.groq.com/openai/v1/chat/completions"
+    private val testUrl = groqUrl // Groq API kullanıyoruz
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
         ) {
             // Header
             Text(
-                text = "DeepSeek API Test",
+                text = "Groq AI API Test",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 16.dp)
@@ -192,7 +192,7 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.padding(12.dp)
             ) {
                 Text(
-                    text = if (message.role == "user") "Siz" else "DeepSeek",
+                    text = if (message.role == "user") "Siz" else "Groq AI",
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.Bold,
                     color = if (message.role == "user") 
@@ -216,7 +216,7 @@ class MainActivity : ComponentActivity() {
     private suspend fun callDeepSeekAPI(message: String): String {
         return withContext(Dispatchers.IO) {
             val json = JSONObject().apply {
-                put("model", "deepseek-chat")
+                put("model", "llama3-8b-8192")
                 put("messages", JSONArray().apply {
                     put(JSONObject().apply {
                         put("role", "system")
